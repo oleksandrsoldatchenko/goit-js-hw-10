@@ -18,3 +18,40 @@ body {
   max-width: 320px;
   margin-bottom: 16px;
 }
+
+img {
+  display: block;
+}
+
+h3 {
+  display: block;
+  margin: 0;
+  margin: 0 0 0 10px;
+  font-weight: inherit;
+}
+
+i {
+  font-style: normal;
+}
+
+.country-list {
+  list-style: none;
+  padding: 0;
+}
+
+.country-list__item {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.country-info__box {
+  display: flex;
+  align-items: center;
+}
+
+.country-info__country-name {
+  font-size: 2.17em;
+  font-weight: bold;
+}
