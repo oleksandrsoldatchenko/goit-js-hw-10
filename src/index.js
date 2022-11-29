@@ -11,7 +11,7 @@ const DEBOUNCE_DELAY = 300;
 const refs = {
     input: document.querySelector('#search-box'),
     countriesList: document.querySelector('.country-list'),
-    countriesInfo: document.querySelector('.country-info'),
+    countryInfo: document.querySelector('.country-info'),
 };
 
 // Слухач подій на input із debounce для реалізації затримки обробнику події і HTTP-запит
@@ -26,7 +26,7 @@ function onInputValue(event) {
   // Умова не виведення результатів пошушку у разі відсутності введених даних
   if (inputValue === '') {
     refs.countriesList.innerHTML = '';
-    refs.countriesInfo.innerHTML = '';
+    refs.countryInfo.innerHTML = '';
     return;
   }
 
@@ -49,7 +49,7 @@ function countriesListCreate(countries) {
       'Too many matches found. Please enter a more specific name.'
     );
     refs.countriesList.innerHTML = '';
-    refs.countriesInfo.innerHTML = '';
+    refs.countryInfo.innerHTML = '';
     return;
   }
 
@@ -59,14 +59,14 @@ function countriesListCreate(countries) {
       .map(country => countriesList(country))
       .join('');
     refs.countriesList.innerHTML = listCountries;
-    refs.countriesInfo.innerHTML = '';
+    refs.countryInfo.innerHTML = '';
   }
 
   // Единий збіг з масиву обнуляє список і вкладає інформацію єдиного збіга в картку
   if (countries.length === 1) {
-    const cardCountry = countries.map(country => countryСard(country)).join('');
-    refs.countriesInfo.innerHTML = cardCountry;
+      const cardCountry = countries.map(country => countryСard(country)).join('');
     refs.countriesList.innerHTML = '';
+    refs.countryInfo.innerHTML = cardCountry;
   }
 };
 
@@ -74,7 +74,7 @@ function countriesListCreate(countries) {
 function countriesListError(error) {
   Notiflix.Notify.failure('Oops, there is no country with that name');
   refs.countriesList.innerHTML = '';
-  refs.countriesInfo.innerHTML = '';
+  refs.countryInfo.innerHTML = '';
   return error;
 };
 
@@ -90,15 +90,18 @@ function countriesList({ flags, name }) {
 
 // Функція, що доповнює div інформацією по країні в разі єдиного збігу по пошуку - розкриває картку країни
 function countryСard({ flags, name, capital, population, languages }) {
+    // return console.log(Object.values(languages));
     return `
         <div class="country-info">
             <div class="country-info__box">
                 <img src="${flags.svg}" alt="${name.official}" width="50" />
                 <h3 class="country-info__country-name">${name.official}</h3>
             </div>
-            <p><b><i>Capital:</i></b>${capital}</p>
-            <p><b><i>Population:</i></b>${population}</p>
-            <p><b><i>Languages:</i></b>${Object.values(languages)}</p>
+            <p><b><i>Capital:</i></b> ${capital}</p>
+            <p><b><i>Population:</i></b> ${population}</p>
+            <p><b><i>Languages:</i></b> ${Object.values(languages).join(
+              ', '
+            )}</p>
         </div>
     `;
 };
