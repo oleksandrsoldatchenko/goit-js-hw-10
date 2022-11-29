@@ -93,7 +93,7 @@ function countryСard({ flags, name, capital, population, languages }) {
     return `
         <div class="country-info">
             <div class="country-info__box">
-                <img src="${flags.svg}" alt="${name.official}" width="25" />
+                <img src="${flags.svg}" alt="${name.official}" width="50" />
                 <h3 class="country-info__country-name">${name.official}</h3>
             </div>
             <p><b><i>Capital:</i></b>${capital}</p>
